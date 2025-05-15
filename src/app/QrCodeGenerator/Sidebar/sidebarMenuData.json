@@ -1,0 +1,111 @@
+[
+  {
+    "section": "Product",
+    "items": [
+      {
+        "title": "PRO Features",
+        "description": "Create QR Codes your audience want to scan"
+      },
+      {
+        "title": "QR Code Solutions",
+        "description": "New here? Get started with the basics"
+      },
+      { "title": "Pricing", "description": "Select a plan for any budget" },
+      {
+        "title": "Customers",
+        "description": "Learn how the best companies use PRO"
+      },
+      {
+        "title": "API",
+        "description": "Integrate QR Code creation in your system"
+      },
+      {
+        "title": "Guides",
+        "description": "Take advantage of everything we have to offer"
+      }
+    ]
+  },
+  {
+    "section": "Resources",
+    "items": [
+      {
+        "title": "QR Codes in Marketing",
+        "description": "Actionable advice for novice and pro marketers"
+      },
+      {
+        "title": "QR Codes on Materials",
+        "description": "Add QR Codes to virtually anything"
+      },
+      {
+        "title": "QR Codes for Business",
+        "description": "Build engaging campaigns for any industry"
+      },
+      {
+        "title": "QR Codes for Education",
+        "description": "Drive engagement in schools"
+      },
+      {
+        "title": "QR Codes for Nonprofits",
+        "description": "Raise awareness for charities"
+      },
+      {
+        "title": "QR Codes for Personal Use",
+        "description": "Supercharge your life and automate everything"
+      },
+      {
+        "title": "QR Codes for Holidays & Occasions",
+        "description": "Create engaging occasion-based marketing"
+      },
+      {
+        "title": "QR Code Printing Shop",
+        "description": "Are your QR Codes ready to go? Select your marketing collateral and print them right here!"
+      }
+    ]
+  },
+  {
+    "section": "Support",
+    "items": [
+      {
+        "title": "Help Center",
+        "description": "Find the answers to all your QR Code questions"
+      }
+    ]
+  },
+  {
+    "section": "About Us",
+    "items": [
+      {
+        "title": "Bitly Europe",
+        "description": "The brains behind the QR Code marketing tool"
+      },
+      {
+        "title": "Partnership Program",
+        "description": "Become our partner and grow your business"
+      },
+      {
+        "title": "Jobs",
+        "description": "Join us and be a part of a high-performing team"
+      },
+      {
+        "title": "Privacy Policy",
+        "description": "We’re committed to protecting your privacy"
+      },
+      {
+        "title": "Terms of Service",
+        "description": "Read our terms of service"
+      },
+      {
+        "title": "Legal Notice",
+        "description": "Legal information about our company"
+      },
+      {
+        "title": "Cookie Policy",
+        "description": "Cookie policy of our company"
+      }
+    ]
+  },
+  {
+    "section": "Blog",
+    "items": []
+  }
+]

@@ -1,0 +1,44 @@
+.header {
+  position: sticky;
+  padding-bottom: 4px;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 0px 0px 0px 12px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.brand_image {
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: #fef08a;
+}
+.brand_brandName {
+  width: 160px;
+  text-align: center;
+  line-height: 10px;
+  font-size: 16px;
+  font-family: "Segoe UI Rounded", "Segoe UI", sans-serif;
+  font-weight: 800;
+  color: rgb(0, 0, 96);
+}
+.brand_brandName_span {
+  font-weight: 400;
+  font-size: 10px;
+}
+
+.meny {
+  display: inline-flex;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+}

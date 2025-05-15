@@ -20,6 +20,9 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
+        header_link: "text-blue-600  underline-offset-4 hover:underline",
+        header_button:
+          "rounded-full bg-blue-500 text-white font-bold hover:bg-blue-600",
         andrey: "cursor-pointer ",
       },
       size: {
@@ -27,6 +30,7 @@ const buttonVariants = cva(
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
+        header: "text-[12px]  h-6 px-2 py-1 has-[>svg]:px-2",
       },
     },
     defaultVariants: {
