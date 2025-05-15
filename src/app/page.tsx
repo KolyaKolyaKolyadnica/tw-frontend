@@ -1,6 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 
@@ -18,8 +20,9 @@ export default function Main() {
         Go to the dashboard
       </Button>
 
-      <div className="border-4 border-gray-800 h-250 mr-12 ml-12">
-        {"<Content />"}
+      <div className="flex flex-col items-center border-4 border-gray-800 h-250 mr-12 ml-12">
+        <Link href="/MainTabs ">MainTabs</Link>
+        <Link href="/QrCodeGenerator">QrCodeGenerator</Link>
       </div>
       <Footer />
     </>
