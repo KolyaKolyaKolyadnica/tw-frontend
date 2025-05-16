@@ -1,13 +1,11 @@
-"use client";
 import React from "react";
 
-import Container from "./Container";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Content from "./Content";
 
 export default function MainTabs() {
   return (
-    <Container>
+    <div className="flex  justify-center flex-grow mb-2">
       <Tabs defaultValue="contant_1" className="m-2 ">
         <TabsList>
           <TabsTrigger value="contant_1">contant_1</TabsTrigger>
@@ -24,6 +22,6 @@ export default function MainTabs() {
           <Content>333</Content>
         </TabsContent>
       </Tabs>
-    </Container>
+    </div>
   );
 }
