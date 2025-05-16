@@ -3,7 +3,13 @@
 import React, { useEffect, useRef } from "react";
 import QRCodeStyling from "qr-code-styling";
 
-export default function QRCodeComponent({ text }: { text: string }) {
+export default function QrCode({
+  text,
+  className,
+}: {
+  text?: string;
+  className?: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const qrCode = React.useMemo(() => {
     return new QRCodeStyling({
@@ -37,5 +43,5 @@ export default function QRCodeComponent({ text }: { text: string }) {
     qrCode.update({ data: text });
   }, [text, qrCode]);
 
-  return <div ref={ref} className="w-10 h-10" />;
+  return <div ref={ref} className={className} />;
 }

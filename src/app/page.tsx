@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 import Footer from "@/components/Footer/Footer";
-import QrCode from "@/components/QrCode/QrCode";
+import QrCodeSection from "@/components/QrCodeSection/QrCodeSection";
 
 export default function Main() {
   return (
@@ -14,7 +14,7 @@ export default function Main() {
           </Button>
         </Link>
 
-        <QrCode />
+        <QrCodeSection />
       </div>
       <Footer />
     </>
