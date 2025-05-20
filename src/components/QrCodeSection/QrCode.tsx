@@ -2,32 +2,29 @@
 
 import React, { useEffect, useRef } from "react";
 import QRCodeStyling from "qr-code-styling";
+import { useSelector } from "react-redux";
 
-export default function QrCode({
-  text,
-  className,
-}: {
-  text?: string;
-  className?: string;
-}) {
+export default function QrCode({ className }: { className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
+  const count = useSelector((state) => state.propertyQr);
+
   const qrCode = React.useMemo(() => {
     return new QRCodeStyling({
       width: 100,
       height: 100,
       type: "svg",
       data: "",
-      image: "",
+      image: count.logo,
       dotsOptions: {
         color: "#4267b2",
-        type: "rounded",
+        type: count.shape,
       },
       backgroundOptions: {
         color: "#e9ebee",
       },
       imageOptions: {
         crossOrigin: "anonymous",
-        margin: 20,
+        margin: 2,
       },
     });
   }, []);
@@ -40,8 +37,15 @@ export default function QrCode({
   }, [qrCode]);
 
   useEffect(() => {
-    qrCode.update({ data: text });
-  }, [text, qrCode]);
+    qrCode.update({
+      data: count.text,
+      image: count.logo,
+      dotsOptions: {
+        type: count.shape,
+        color: "#4267b2",
+      },
+    });
+  }, [count.text, count.logo, count.shape, qrCode]);
 
   return <div ref={ref} className={className} />;
 }
