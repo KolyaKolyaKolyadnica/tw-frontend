@@ -5,8 +5,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import ShapeColor from "./ShapeColor";
+import Shape from "./Shape";
 import UploadLogo from "./UploadLogo";
+import ColorShape from "./ColorShape";
 
 export default function AccordionMenu() {
   return (
@@ -16,16 +17,22 @@ export default function AccordionMenu() {
     >
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="item-1">
-          <AccordionTrigger>Frame New!</AccordionTrigger>
+          <AccordionTrigger>Frame</AccordionTrigger>
           <AccordionContent>ups</AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
-          <AccordionTrigger>Shape & Color</AccordionTrigger>
+          <AccordionTrigger>Shape</AccordionTrigger>
           <AccordionContent>
-            <ShapeColor />
+            <Shape />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
+          <AccordionTrigger>Color shape</AccordionTrigger>
+          <AccordionContent>
+            <ColorShape />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-4">
           <AccordionTrigger>Logo</AccordionTrigger>
           <AccordionContent>
             <UploadLogo />
