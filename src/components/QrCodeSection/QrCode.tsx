@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useRef } from "react";
 import QRCodeStyling from "qr-code-styling";
 import { useSelector } from "react-redux";
