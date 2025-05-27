@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setLogo } from "@/components/redux/propertyQrSlice";
+import { setLogo } from "@/redux/propertyQrSlice";
 
 import style from "./style.module.css";
 

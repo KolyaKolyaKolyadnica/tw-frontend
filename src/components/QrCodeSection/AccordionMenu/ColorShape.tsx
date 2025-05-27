@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setColorStops } from "@/components/redux/propertyQrSlice";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-import { DeleteButton, AddColorButton } from "./Delete&AddColor_Bottun";
+import PushColorButton from "./PushColorButton";
+import DeleteButton from "./DeleteButton";
 import ColorPicker from "./ColorPicker";
 
 import style from "./style.module.css";
@@ -13,76 +13,43 @@ type ColorStop = {
 
 type PropertyQrState = {
   colorStops: ColorStop[];
-  // остальные поля: text, shape, logo ...
 };
 export default function ColorShape() {
   const count = useSelector(
     (state: { propertyQr: PropertyQrState }) => state.propertyQr
-  ); // fix type later
-  const [colorPalette, setColorPalette] = useState<string[]>([]);
+  );
+
   const [targetColor, setTargetColor] = useState(0);
   const [angle, setAngle] = useState(90); // угол по умолчанию
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const colors = count.colorStops.map((item) => item.color);
-    setColorPalette(colors);
-  }, []);
-
-  useEffect(() => {
-    let colorStops = [];
-    if (colorPalette.length >= 2) {
-      const step = 1 / (colorPalette.length - 1);
-      colorStops = colorPalette.map((color, index) => ({
-        offset: step * index,
-        color,
-      }));
-    } else {
-      colorStops = [
-        {
-          offset: 1,
-          color: colorPalette,
-        },
-      ];
-    }
-    dispatch(setColorStops(colorStops));
-  }, [colorPalette]);
-
   return (
-    <div>
+    <div className="overflow-hidden transition-all duration-300 ">
       <div className={style.container}>
-        {colorPalette.map((el, index) => (
+        {count.colorStops.map((el, index) => (
           <div
             key={index}
             onClick={() => {
-              setTargetColor(index);
+              targetColor == index ? setTargetColor(-1) : setTargetColor(index);
             }}
             className={`${style.square} ${
-              index === targetColor ? style.square_target : ""
+              index == targetColor ? style.square_target : -1
             }`}
           >
             <div
               className=" w-[80%] h-[80%] rounded-sm relative"
-              style={{ backgroundColor: el }}
+              style={{ backgroundColor: el.color }}
             >
               {index > 0 ? (
-                <DeleteButton setColorPalette={setColorPalette} index={index} />
+                <DeleteButton storeKey={"colorStops"} index={index} />
               ) : (
                 ""
               )}
             </div>
           </div>
         ))}
-        <AddColorButton
-          colorPalette={colorPalette}
-          setColorPalette={setColorPalette}
-        />
+        <PushColorButton storeKey={"colorStops"} />
       </div>
-      <ColorPicker
-        colorPalette={colorPalette}
-        setColorPalette={setColorPalette}
-        targetColor={targetColor}
-      />
+      <ColorPicker targetColor={targetColor} />
     </div>
   );
 }

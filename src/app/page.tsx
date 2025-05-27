@@ -1,6 +1,6 @@
 "use client";
 import { Provider } from "react-redux";
-import store from "@/components/redux/store";
+import store from "@/redux/store";
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";

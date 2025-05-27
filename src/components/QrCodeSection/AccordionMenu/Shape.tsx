@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setShape } from "@/components/redux/propertyQrSlice";
+import { setShape } from "@/redux/propertyQrSlice";
 import style from "./style.module.css";
 
 export default function Shape() {

@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 const QrCode = dynamic(() => import("./QrCode"), { ssr: false });
 import { Input } from "@/components/ui/input";
 import { useDispatch } from "react-redux";
-import { setText } from "@/components/redux/propertyQrSlice";
+import { setText } from "@/redux/propertyQrSlice";
 
 import AccordionMenu from "./AccordionMenu/AccordionMenu";
 
