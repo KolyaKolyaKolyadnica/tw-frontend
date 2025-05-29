@@ -5,17 +5,23 @@ import { updateColorStore } from "@/redux/propertyQrSlice";
 
 import { Input } from "@/components/ui/input";
 
-export default function ColorPicker({ targetColor }: any) {
+export default function ColorPicker({
+  targetColor,
+  storeKey,
+}: {
+  targetColor: number | null;
+  storeKey: "dotsOptions" | "cornersSquareOptions" | "backgroundOptions";
+}) {
   const count = useSelector((state: any) => state.propertyQr); // fix type later
-  const dispathc = useDispatch();
+  const dispatch = useDispatch();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newColor = e.target.value.trim();
     // обновляем палитру всегда, но безопасно обрабатываем ошибку
     if (/^#([0-9a-fA-F]{0,6})$/.test(newColor)) {
-      dispathc(
+      dispatch(
         updateColorStore({
-          storeKey: "colorStops",
+          storeKey: storeKey,
           targetColor,
           newColor: newColor,
         })
@@ -23,18 +29,20 @@ export default function ColorPicker({ targetColor }: any) {
     }
   };
 
-  function selectColor() {
-    return targetColor !== -1 ? count.colorStops[targetColor].color : "";
-  }
+  const getColor = () => {
+    return targetColor !== null
+      ? count[storeKey].gradient[targetColor].color
+      : "";
+  };
 
   return (
-    <div className={"flex gap-1" + (targetColor === -1 ? " absolute" : "")}>
+    <div className={"flex gap-1" + (targetColor === null ? " absolute" : "")}>
       <HexColorPicker
-        color={selectColor()}
+        color={getColor()}
         onChange={(newColor) =>
-          dispathc(
+          dispatch(
             updateColorStore({
-              storeKey: "colorStops",
+              storeKey: storeKey,
               targetColor,
               newColor: newColor,
             })
@@ -47,31 +55,31 @@ export default function ColorPicker({ targetColor }: any) {
           {
             <Input
               type="text"
-              value={selectColor()}
+              value={getColor()}
               onChange={handleInputChange}
               className="w-20 inline bg-gray-200"
             />
           }
         </label>
         <label>
-          {/* допилить подержку RGB*/}
+          {/* {"* допилить подержку RGB*"} */}
           Selected color (RGB):{" "}
           {
             <Input
               type="text"
-              value={selectColor()}
+              value={getColor()}
               onChange={handleInputChange}
               className="w-20 inline bg-gray-200"
             />
           }
         </label>
         <label>
-          {/* допилить подержку HSL*/}
+          {/* {"* допилить подержку HSL*"} */}
           Selected color (HSL):{" "}
           {
             <Input
               type="text"
-              value={selectColor()}
+              value={getColor()}
               onChange={handleInputChange}
               className="w-20 inline bg-gray-200"
             />
@@ -79,7 +87,7 @@ export default function ColorPicker({ targetColor }: any) {
         </label>
         <div
           className={"w-full h-12 rounded-sm border border-black"}
-          style={{ backgroundColor: selectColor() }}
+          style={{ backgroundColor: getColor() }}
         />
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-const QrCode = dynamic(() => import("./QrCode"), { ssr: false });
+const QrCode = dynamic(() => import("./QrCode"), { ssr: false }); // fix type later
 import { Input } from "@/components/ui/input";
 import { useDispatch } from "react-redux";
 import { setText } from "@/redux/propertyQrSlice";
@@ -25,11 +25,7 @@ export default function QrCodeSection() {
           className="border-2 border-blue-500"
           onChange={handleChange}
         />
-        <QrCode
-          className="flex items-center
-        justify-center
-        w-40 aspect-square border-2 border-blue-500 rounded-md "
-        />
+        <QrCode />
       </div>
       <AccordionMenu />
     </>

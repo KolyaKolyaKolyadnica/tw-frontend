@@ -6,13 +6,13 @@ export default function DeleteButton({
   storeKey,
   index,
 }: {
-  storeKey: "colorStops";
+  storeKey: "dotsOptions" | "cornersSquareOptions" | "backgroundOptions";
   index: number;
 }) {
   const dispatch = useDispatch();
 
   return (
-    <div
+    <button
       onClick={(e) => {
         e.stopPropagation(); // чтобы не срабатывало событие выбора цвета
         dispatch(deleteColorStore({ storeKey: storeKey, index }));
@@ -22,6 +22,6 @@ export default function DeleteButton({
       <span className="text-red-800 relative bottom-[2.1px] left-[2.1px] rotate-45 select-none text-[24px] font-medium">
         +
       </span>
-    </div>
+    </button>
   );
 }

@@ -1,38 +1,37 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-import PushColorButton from "./PushColorButton";
+import GetColorButton from "./GetColorButton";
 import DeleteButton from "./DeleteButton";
 import ColorPicker from "./ColorPicker";
 
 import style from "./style.module.css";
-type ColorStop = {
-  offset: number;
-  color: string;
-};
 
-type PropertyQrState = {
-  colorStops: ColorStop[];
-};
-export default function ColorShape() {
+export default function ColorShape({
+  storeKey,
+}: {
+  storeKey: "dotsOptions" | "cornersSquareOptions" | "backgroundOptions";
+}) {
   const count = useSelector(
     (state: { propertyQr: PropertyQrState }) => state.propertyQr
   );
 
-  const [targetColor, setTargetColor] = useState(0);
+  const [targetColor, setTargetColor] = useState<number | null>(0);
   const [angle, setAngle] = useState(90); // угол по умолчанию
 
   return (
     <div className="overflow-hidden transition-all duration-300 ">
       <div className={style.container}>
-        {count.colorStops.map((el, index) => (
+        {count[storeKey].gradient.map((el, index) => (
           <div
             key={index}
             onClick={() => {
-              targetColor == index ? setTargetColor(-1) : setTargetColor(index);
+              targetColor === index
+                ? setTargetColor(null)
+                : setTargetColor(index);
             }}
             className={`${style.square} ${
-              index == targetColor ? style.square_target : -1
+              index === targetColor ? style.square_target : null
             }`}
           >
             <div
@@ -40,16 +39,16 @@ export default function ColorShape() {
               style={{ backgroundColor: el.color }}
             >
               {index > 0 ? (
-                <DeleteButton storeKey={"colorStops"} index={index} />
+                <DeleteButton storeKey={storeKey} index={index} />
               ) : (
                 ""
               )}
             </div>
           </div>
         ))}
-        <PushColorButton storeKey={"colorStops"} />
+        <GetColorButton storeKey={storeKey} />
       </div>
-      <ColorPicker targetColor={targetColor} />
+      <ColorPicker targetColor={targetColor} storeKey={storeKey} />
     </div>
   );
 }

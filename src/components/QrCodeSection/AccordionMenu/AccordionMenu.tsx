@@ -29,10 +29,28 @@ export default function AccordionMenu() {
         <AccordionItem value="item-3">
           <AccordionTrigger>Color shape</AccordionTrigger>
           <AccordionContent>
-            <ColorShape />
+            <ColorShape storeKey={"dotsOptions"} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-4">
+          <AccordionTrigger>Square (TODO)</AccordionTrigger>
+          <AccordionContent>
+            <Shape />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-5">
+          <AccordionTrigger>Color square</AccordionTrigger>
+          <AccordionContent>
+            <ColorShape storeKey={"cornersSquareOptions"} />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-6">
+          <AccordionTrigger>Color background</AccordionTrigger>
+          <AccordionContent>
+            <ColorShape storeKey={"backgroundOptions"} />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-7">
           <AccordionTrigger>Logo</AccordionTrigger>
           <AccordionContent>
             <UploadLogo />

@@ -3,15 +3,15 @@ import { useDispatch } from "react-redux";
 import { pushColorStore } from "@/redux/propertyQrSlice";
 import style from "./style.module.css";
 
-export default function PushColorButton({
+export default function GetColorButton({
   storeKey,
 }: {
-  storeKey: "colorStops";
+  storeKey: "dotsOptions" | "cornersSquareOptions" | "backgroundOptions";
 }) {
   const dispatch = useDispatch();
 
   return (
-    <div
+    <button
       className={style.square}
       onClick={() => {
         dispatch(pushColorStore({ storeKey: storeKey }));
@@ -20,6 +20,6 @@ export default function PushColorButton({
       <span className="transform text-blue-800 select-none translate-y-[-7%] text-[58px] font-medium">
         +
       </span>
-    </div>
+    </button>
   );
 }
