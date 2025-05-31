@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { updateGradientOffset } from "@/utils/qrHelpers";
 
 export const propertyQrSlice = createSlice({

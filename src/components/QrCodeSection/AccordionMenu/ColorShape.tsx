@@ -17,7 +17,6 @@ export default function ColorShape({
   );
 
   const [targetColor, setTargetColor] = useState<number | null>(0);
-  const [angle, setAngle] = useState(90); // угол по умолчанию
 
   return (
     <div className="overflow-hidden transition-all duration-300 ">
@@ -31,7 +30,7 @@ export default function ColorShape({
                 : setTargetColor(index);
             }}
             className={`${style.square} ${
-              index === targetColor ? style.square_target : null
+              index === targetColor ? style.square_target : ""
             }`}
           >
             <div

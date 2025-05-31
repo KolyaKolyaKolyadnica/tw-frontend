@@ -12,13 +12,14 @@ export default function ColorPicker({
   targetColor: number | null;
   storeKey: "dotsOptions" | "cornersSquareOptions" | "backgroundOptions";
 }) {
-  const count = useSelector((state: any) => state.propertyQr); // fix type later
+  const count = useSelector((state: any) => state.propertyQr); // to_do fix type later
   const dispatch = useDispatch();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newColor = e.target.value.trim();
-    // обновляем палитру всегда, но безопасно обрабатываем ошибку
-    if (/^#([0-9a-fA-F]{0,6})$/.test(newColor)) {
+
+    const isValidHexColor = /^#([0-9a-fA-F]{0,6})$/.test(newColor);
+    if (isValidHexColor) {
       dispatch(
         updateColorStore({
           storeKey: storeKey,
@@ -62,7 +63,7 @@ export default function ColorPicker({
           }
         </label>
         <label>
-          {/* {"* допилить подержку RGB*"} */}
+          {/* {"*to_do допилить подержку RGB*"} */}
           Selected color (RGB):{" "}
           {
             <Input
@@ -74,7 +75,7 @@ export default function ColorPicker({
           }
         </label>
         <label>
-          {/* {"* допилить подержку HSL*"} */}
+          {/* {"*to_do допилить подержку HSL*"} */}
           Selected color (HSL):{" "}
           {
             <Input

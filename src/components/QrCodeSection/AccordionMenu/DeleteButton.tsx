@@ -14,7 +14,7 @@ export default function DeleteButton({
   return (
     <button
       onClick={(e) => {
-        e.stopPropagation(); // чтобы не срабатывало событие выбора цвета
+        e.stopPropagation();
         dispatch(deleteColorStore({ storeKey: storeKey, index }));
       }}
       className="border bg-gray-200 border-black absolute top-[-4px] right-[-4px] w-4 h-4 rounded-full flex items-center justify-center"

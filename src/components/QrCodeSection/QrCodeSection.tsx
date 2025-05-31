@@ -1,7 +1,6 @@
 import React from "react";
-import dynamic from "next/dynamic";
+import QrCode from "./QrCode";
 
-const QrCode = dynamic(() => import("./QrCode"), { ssr: false }); // fix type later
 import { Input } from "@/components/ui/input";
 import { useDispatch } from "react-redux";
 import { setText } from "@/redux/propertyQrSlice";
