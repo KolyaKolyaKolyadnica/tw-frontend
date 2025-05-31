@@ -22,7 +22,7 @@ export default function ColorShape({
   return (
     <div className="overflow-hidden transition-all duration-300 ">
       <div className={style.container}>
-        {count[storeKey].gradient.map((el, index) => (
+        {count[storeKey].gradient.colorStops.map((el, index) => (
           <div
             key={index}
             onClick={() => {

@@ -4,38 +4,53 @@ import { updateGradientOffset } from "@/utils/qrHelpers";
 export const propertyQrSlice = createSlice({
   name: "propertyQr",
   initialState: {
-    text: "https://github.com/KolyaKolyaKolyadnica/tw-frontend",
+    width: 100,
+    height: 100,
+    type: "svg",
+    data: "https://github.com/KolyaKolyaKolyadnica/tw-frontend",
     dotsOptions: {
       shape: "classy",
-      gradient: [
-        { offset: 0, color: "#4267b2" },
-        { offset: 1, color: "#ff0000" },
-      ],
+      gradient: {
+        type: "linear",
+        rotation: 45 * (Math.PI / 180),
+        colorStops: [
+          { offset: 0, color: "#4267b2" },
+          { offset: 1, color: "#ff0000" },
+        ],
+      },
     },
     cornersSquareOptions: {
-      gradient: [
-        { offset: 0, color: "#4267b2" },
-        { offset: 1, color: "#ff0000" },
-      ],
+      gradient: {
+        type: "linear",
+        rotation: 90 * (Math.PI / 180),
+        colorStops: [
+          { offset: 0, color: "#4267b2" },
+          { offset: 1, color: "#ff0000" },
+        ],
+      },
     },
     backgroundOptions: {
-      gradient: [
-        { offset: 0, color: "#4267b2" },
-        { offset: 1, color: "#ffffff" },
-      ],
+      gradient: {
+        type: "linear",
+        rotation: 90 * (Math.PI / 180),
+        colorStops: [
+          { offset: 0, color: "#4267b2" },
+          { offset: 1, color: "#ffffff" },
+        ],
+      },
     },
-    logo: "",
+    image: "",
   },
 
   reducers: {
     setText: (state, action) => {
-      state.text = action.payload;
+      state.data = action.payload;
     },
     setShape: (state, action) => {
       state.dotsOptions.shape = action.payload;
     },
     setLogo: (state, action) => {
-      state.logo = action.payload;
+      state.image = action.payload;
     },
 
     updateColorStore: (
@@ -47,9 +62,10 @@ export const propertyQrSlice = createSlice({
       }>
     ) => {
       const { storeKey, targetColor, newColor } = action.payload;
+      const currentColorStops = state[storeKey].gradient.colorStops;
 
       if (targetColor !== null) {
-        state[storeKey].gradient[targetColor].color = newColor;
+        currentColorStops[targetColor].color = newColor;
       }
     },
 
@@ -61,32 +77,32 @@ export const propertyQrSlice = createSlice({
       }>
     ) => {
       const { storeKey, index } = action.payload;
-      const newArr = [
-        ...state[storeKey].gradient.filter((el, i) => i !== index),
-      ];
+      const currentColorStops = state[storeKey].gradient.colorStops;
 
-      state[storeKey].gradient = updateGradientOffset(newArr);
+      const newArr = [...currentColorStops.filter((el, i) => i !== index)];
+
+      state[storeKey].gradient.colorStops = updateGradientOffset(newArr);
     },
 
-    pushColorStore: (
+    getColorStore: (
       state,
       action: PayloadAction<{
         storeKey: "dotsOptions" | "cornersSquareOptions" | "backgroundOptions";
       }>
     ) => {
       const { storeKey } = action.payload;
+      const currentColorStops = state[storeKey].gradient.colorStops;
 
       const newArr = [
-        ...state[storeKey].gradient,
+        ...currentColorStops,
         {
           offset: 0,
           color:
-            state[storeKey].gradient[state[storeKey].gradient.length - 1]
-              ?.color || "#000000",
+            currentColorStops[currentColorStops.length - 1]?.color || "#000000",
         },
       ];
 
-      state[storeKey].gradient = updateGradientOffset(newArr);
+      state[storeKey].gradient.colorStops = updateGradientOffset(newArr);
     },
   },
 });
@@ -97,7 +113,7 @@ export const {
   setLogo,
   updateColorStore,
   deleteColorStore,
-  pushColorStore,
+  getColorStore,
 } = propertyQrSlice.actions;
 
 export default propertyQrSlice.reducer;

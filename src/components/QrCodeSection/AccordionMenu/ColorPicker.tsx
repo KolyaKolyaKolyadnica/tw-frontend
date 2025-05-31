@@ -31,12 +31,12 @@ export default function ColorPicker({
 
   const getColor = () => {
     return targetColor !== null
-      ? count[storeKey].gradient[targetColor].color
+      ? count[storeKey].gradient.colorStops[targetColor].color
       : "";
   };
 
   return (
-    <div className={"flex gap-1" + (targetColor === null ? " absolute" : "")}>
+    <div className={"flex gap-1" + (targetColor === null ? " hidden" : "")}>
       <HexColorPicker
         color={getColor()}
         onChange={(newColor) =>
