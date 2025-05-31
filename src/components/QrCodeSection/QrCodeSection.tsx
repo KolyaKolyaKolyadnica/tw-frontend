@@ -1,34 +1,32 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import QrCode from "./QrCode";
+
 import { Input } from "@/components/ui/input";
+import { useDispatch } from "react-redux";
+import { setText } from "@/redux/propertyQrSlice";
+
+import AccordionMenu from "./AccordionMenu/AccordionMenu";
 
 export default function QrCodeSection() {
-  const [text, setText] = useState("");
-
+  const dispatch = useDispatch();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
+    dispatch(setText(e.target.value));
   };
 
   return (
-    <div
-      className="bg-gray-200 flex items-center
+    <>
+      <div
+        className="bg-gray-200 flex items-center
  justify-center p-2 rounded-md gap-2"
-    >
-      <Input
-        placeholder="Введите текст"
-        className="border-2 border-blue-500"
-        value={text}
-        onChange={handleChange}
-      />
-
-      <QrCode
-        text={text}
-        className="flex items-center
-        justify-center
-        w-40 aspect-square border-2 border-blue-500 rounded-md "
-      />
-    </div>
+      >
+        <Input
+          placeholder="Введите текст"
+          className="border-2 border-blue-500"
+          onChange={handleChange}
+        />
+        <QrCode />
+      </div>
+      <AccordionMenu />
+    </>
   );
 }

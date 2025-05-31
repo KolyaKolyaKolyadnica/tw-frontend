@@ -1,47 +1,35 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import QRCodeStyling from "qr-code-styling";
 
-export default function QrCode({
-  text,
-  className,
-}: {
-  text?: string;
-  className?: string;
-}) {
+import { useSelector } from "react-redux";
+
+export default function ClientQR() {
+  const reduxOptions = useSelector((state: any) => state.propertyQr); // to_do fix type later
+
+  const [qrCode, setQrCode] = useState<QRCodeStyling>();
   const ref = useRef<HTMLDivElement>(null);
-  const qrCode = React.useMemo(() => {
-    return new QRCodeStyling({
-      width: 100,
-      height: 100,
-      type: "svg",
-      data: "",
-      image: "",
-      dotsOptions: {
-        color: "#4267b2",
-        type: "rounded",
-      },
-      backgroundOptions: {
-        color: "#e9ebee",
-      },
-      imageOptions: {
-        crossOrigin: "anonymous",
-        margin: 20,
-      },
-    });
+
+  useEffect(() => {
+    setQrCode(new QRCodeStyling(reduxOptions));
   }, []);
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.innerHTML = "";
-      qrCode.append(ref.current);
+      qrCode?.append(ref.current);
     }
-  }, [qrCode]);
+  }, [qrCode, ref]);
 
   useEffect(() => {
-    qrCode.update({ data: text });
-  }, [text, qrCode]);
+    if (!qrCode) return;
+    qrCode?.update(reduxOptions);
+  }, [qrCode, reduxOptions]);
 
-  return <div ref={ref} className={className} />;
+  return (
+    <div
+      ref={ref}
+      className="flex items-center justify-center w-40 aspect-square border-2 border-blue-500 rounded-md "
+    />
+  );
 }
