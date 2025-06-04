@@ -5,7 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import Shape from "./Shape";
+import OptionsType from "./OptionsType";
 import UploadLogo from "./UploadLogo";
 import ColorShape from "./ColorShape";
 
@@ -20,37 +20,54 @@ export default function AccordionMenu() {
           <AccordionTrigger>Frame</AccordionTrigger>
           <AccordionContent>ups</AccordionContent>
         </AccordionItem>
+
         <AccordionItem value="item-2">
-          <AccordionTrigger>Shape</AccordionTrigger>
+          <AccordionTrigger>dotsOptions type</AccordionTrigger>
           <AccordionContent>
-            <Shape />
+            <OptionsType storeKey={"dotsOptions"} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
-          <AccordionTrigger>Color shape</AccordionTrigger>
+          <AccordionTrigger>dotsOptions</AccordionTrigger>
           <AccordionContent>
             <ColorShape storeKey={"dotsOptions"} />
           </AccordionContent>
         </AccordionItem>
+
         <AccordionItem value="item-4">
-          <AccordionTrigger>Square (TODO)</AccordionTrigger>
+          <AccordionTrigger>cornersSquareOptions type</AccordionTrigger>
           <AccordionContent>
-            <Shape />
+            <OptionsType storeKey={"cornersSquareOptions"} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-5">
-          <AccordionTrigger>Color square</AccordionTrigger>
+          <AccordionTrigger>cornersSquareOptions</AccordionTrigger>
           <AccordionContent>
             <ColorShape storeKey={"cornersSquareOptions"} />
           </AccordionContent>
         </AccordionItem>
+
         <AccordionItem value="item-6">
-          <AccordionTrigger>Color background</AccordionTrigger>
+          <AccordionTrigger>cornersDotOptions type</AccordionTrigger>
+          <AccordionContent>
+            <OptionsType storeKey={"cornersDotOptions"} />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-7">
+          <AccordionTrigger>cornersDotOptions</AccordionTrigger>
+          <AccordionContent>
+            <ColorShape storeKey={"cornersDotOptions"} />
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="item-8">
+          <AccordionTrigger>backgroundOptions</AccordionTrigger>
           <AccordionContent>
             <ColorShape storeKey={"backgroundOptions"} />
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="item-7">
+
+        <AccordionItem value="item-9">
           <AccordionTrigger>Logo</AccordionTrigger>
           <AccordionContent>
             <UploadLogo />

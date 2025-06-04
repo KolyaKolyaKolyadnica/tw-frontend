@@ -6,7 +6,11 @@ import style from "./style.module.css";
 export default function GetColorButton({
   storeKey,
 }: {
-  storeKey: "dotsOptions" | "cornersSquareOptions" | "backgroundOptions";
+  storeKey:
+    | "dotsOptions"
+    | "cornersSquareOptions"
+    | "cornersDotOptions"
+    | "backgroundOptions";
 }) {
   const dispatch = useDispatch();
 

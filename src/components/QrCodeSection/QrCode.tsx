@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import QRCodeStyling from "qr-code-styling";
+import QRCodeStyling, { Options } from "qr-code-styling";
 
 import { useSelector } from "react-redux";
+import type { RootState } from "@/redux/store";
 
 export default function ClientQR() {
-  const reduxOptions = useSelector((state: any) => state.propertyQr); // to_do fix type later
+  const reduxOptions = useSelector((state: RootState) => state.propertyQr);
 
   const [qrCode, setQrCode] = useState<QRCodeStyling>();
   const ref = useRef<HTMLDivElement>(null);
@@ -15,11 +16,20 @@ export default function ClientQR() {
     setQrCode(new QRCodeStyling(reduxOptions));
   }, []);
 
+  // Что Коля об этом думае?
+  // useEffect(() => {
+  //   if (ref.current) {
+  //     qrCode?.append(ref.current);
+  //   }
+  // }, [qrCode, ref]);
+
+  // Небольшой совет по защите от двойного добавления
   useEffect(() => {
-    if (ref.current) {
-      qrCode?.append(ref.current);
+    if (ref.current && qrCode) {
+      ref.current.innerHTML = ""; // очистить контейнер перед вставкой
+      qrCode.append(ref.current);
     }
-  }, [qrCode, ref]);
+  }, [qrCode]);
 
   useEffect(() => {
     if (!qrCode) return;

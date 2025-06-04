@@ -6,7 +6,11 @@ export default function DeleteButton({
   storeKey,
   index,
 }: {
-  storeKey: "dotsOptions" | "cornersSquareOptions" | "backgroundOptions";
+  storeKey:
+    | "dotsOptions"
+    | "cornersSquareOptions"
+    | "cornersDotOptions"
+    | "backgroundOptions";
   index: number;
 }) {
   const dispatch = useDispatch();

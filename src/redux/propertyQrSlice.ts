@@ -1,18 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { updateGradientOffset } from "@/utils/qrHelpers";
+import type { QrCodeState } from "./types";
+import { CornerDotType, CornerSquareType, DotType } from "qr-code-styling";
 
 export const propertyQrSlice = createSlice({
   name: "propertyQr",
-  initialState: {
+  initialState: <QrCodeState>{
+    shape: "square",
     width: 100,
     height: 100,
     type: "svg",
     data: "https://github.com/KolyaKolyaKolyadnica/tw-frontend",
     dotsOptions: {
-      shape: "classy",
+      type: "classy",
       gradient: {
         type: "linear",
-        rotation: 45 * (Math.PI / 180),
+        rotation: 0,
         colorStops: [
           { offset: 0, color: "#4267b2" },
           { offset: 1, color: "#ff0000" },
@@ -20,9 +23,21 @@ export const propertyQrSlice = createSlice({
       },
     },
     cornersSquareOptions: {
+      type: undefined,
       gradient: {
         type: "linear",
-        rotation: 90 * (Math.PI / 180),
+        rotation: 0,
+        colorStops: [
+          { offset: 0, color: "#4267b2" },
+          { offset: 1, color: "#ff0000" },
+        ],
+      },
+    },
+    cornersDotOptions: {
+      type: undefined,
+      gradient: {
+        type: "linear",
+        rotation: 0,
         colorStops: [
           { offset: 0, color: "#4267b2" },
           { offset: 1, color: "#ff0000" },
@@ -32,7 +47,7 @@ export const propertyQrSlice = createSlice({
     backgroundOptions: {
       gradient: {
         type: "linear",
-        rotation: 90 * (Math.PI / 180),
+        rotation: 90,
         colorStops: [
           { offset: 0, color: "#4267b2" },
           { offset: 1, color: "#ffffff" },
@@ -46,9 +61,19 @@ export const propertyQrSlice = createSlice({
     setText: (state, action) => {
       state.data = action.payload;
     },
-    setShape: (state, action) => {
-      state.dotsOptions.shape = action.payload;
+
+    optionsType: (
+      state,
+      action: PayloadAction<{
+        storeKey: "dotsOptions" | "cornersSquareOptions" | "cornersDotOptions";
+        newType: DotType | CornerSquareType | CornerDotType;
+      }>
+    ) => {
+      const { storeKey, newType } = action.payload;
+
+      state[storeKey].type = newType;
     },
+
     setLogo: (state, action) => {
       state.image = action.payload;
     },
@@ -56,30 +81,38 @@ export const propertyQrSlice = createSlice({
     updateColorStore: (
       state,
       action: PayloadAction<{
-        storeKey: "dotsOptions" | "cornersSquareOptions" | "backgroundOptions";
+        storeKey:
+          | "dotsOptions"
+          | "cornersSquareOptions"
+          | "cornersDotOptions"
+          | "backgroundOptions";
         targetColor: number | null;
         newColor: string;
       }>
     ) => {
       const { storeKey, targetColor, newColor } = action.payload;
-      const currentColorStops = state[storeKey].gradient.colorStops;
+      const { colorStops } = state[storeKey].gradient;
 
       if (targetColor !== null) {
-        currentColorStops[targetColor].color = newColor;
+        colorStops[targetColor].color = newColor;
       }
     },
 
     deleteColorStore: (
       state,
       action: PayloadAction<{
-        storeKey: "dotsOptions" | "cornersSquareOptions" | "backgroundOptions";
+        storeKey:
+          | "dotsOptions"
+          | "cornersSquareOptions"
+          | "cornersDotOptions"
+          | "backgroundOptions";
         index: number;
       }>
     ) => {
       const { storeKey, index } = action.payload;
-      const currentColorStops = state[storeKey].gradient.colorStops;
+      const { colorStops } = state[storeKey].gradient;
 
-      const newArr = [...currentColorStops.filter((el, i) => i !== index)];
+      const newArr = [...colorStops.filter((el, i) => i !== index)];
 
       state[storeKey].gradient.colorStops = updateGradientOffset(newArr);
     },
@@ -87,33 +120,51 @@ export const propertyQrSlice = createSlice({
     getColorStore: (
       state,
       action: PayloadAction<{
-        storeKey: "dotsOptions" | "cornersSquareOptions" | "backgroundOptions";
+        storeKey:
+          | "dotsOptions"
+          | "cornersSquareOptions"
+          | "cornersDotOptions"
+          | "backgroundOptions";
       }>
     ) => {
       const { storeKey } = action.payload;
-      const currentColorStops = state[storeKey].gradient.colorStops;
+      const { colorStops } = state[storeKey].gradient;
 
       const newArr = [
-        ...currentColorStops,
+        ...colorStops,
         {
           offset: 0,
-          color:
-            currentColorStops[currentColorStops.length - 1]?.color || "#000000",
+          color: colorStops[colorStops.length - 1]?.color || "#000000",
         },
       ];
 
       state[storeKey].gradient.colorStops = updateGradientOffset(newArr);
+    },
+    rotationGradient: (
+      state,
+      action: PayloadAction<{
+        storeKey:
+          | "dotsOptions"
+          | "cornersSquareOptions"
+          | "cornersDotOptions"
+          | "backgroundOptions";
+        rotationAngle: number;
+      }>
+    ) => {
+      const { storeKey, rotationAngle } = action.payload;
+      state[storeKey].gradient.rotation = rotationAngle;
     },
   },
 });
 
 export const {
   setText,
-  setShape,
+  optionsType,
   setLogo,
   updateColorStore,
   deleteColorStore,
   getColorStore,
+  rotationGradient,
 } = propertyQrSlice.actions;
 
 export default propertyQrSlice.reducer;
