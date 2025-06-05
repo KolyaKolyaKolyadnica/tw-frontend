@@ -15,14 +15,14 @@ export default function ColorShape({
 }: {
   storeKey: StoreKeyTypeColor;
 }) {
-  const QrOptions = useSelector((state: RootState) => state.propertyQr);
+  const qrOptions = useSelector((state: RootState) => state.propertyQr);
 
   const [targetColor, setTargetColor] = useState<number | null>(0);
 
   return (
     <div className="overflow-hidden transition-all duration-300 ">
       <div className={style.container}>
-        {QrOptions[storeKey].gradient.colorStops.map((el, index) => (
+        {qrOptions[storeKey].gradient.colorStops.map((el, index) => (
           <div
             key={index}
             onClick={() => {

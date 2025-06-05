@@ -7,13 +7,13 @@ import { useSelector } from "react-redux";
 import type { RootState } from "@/redux/store";
 
 export default function ClientQR() {
-  const QrOptions = useSelector((state: RootState) => state.propertyQr);
+  const qrOptions = useSelector((state: RootState) => state.propertyQr);
 
   const [qrCode, setQrCode] = useState<QRCodeStyling>();
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setQrCode(new QRCodeStyling(QrOptions));
+    setQrCode(new QRCodeStyling(qrOptions));
   }, []);
 
   useEffect(() => {
@@ -24,8 +24,8 @@ export default function ClientQR() {
 
   useEffect(() => {
     if (!qrCode) return;
-    qrCode?.update(QrOptions);
-  }, [qrCode, QrOptions]);
+    qrCode?.update(qrOptions);
+  }, [qrCode, qrOptions]);
 
   return (
     <div

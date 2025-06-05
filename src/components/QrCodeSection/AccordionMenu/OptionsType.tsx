@@ -11,7 +11,7 @@ export default function OptionsType({
 }: {
   storeKey: StoreKeyTypePoint;
 }) {
-  const QrOptions = useSelector((state: RootState) => state.propertyQr);
+  const qrOptions = useSelector((state: RootState) => state.propertyQr);
   const dispatch = useDispatch();
 
   const dotType = [
@@ -41,7 +41,7 @@ export default function OptionsType({
               dispatch(optionsType({ storeKey, newType: el }));
             }}
             className={`${style.square} ${
-              el === QrOptions.shape ? style.square_target : ""
+              el === qrOptions.shape ? style.square_target : ""
             }`}
           >
             {el}
