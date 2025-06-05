@@ -2,11 +2,12 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { getColorStore } from "@/redux/propertyQrSlice";
 import style from "./style.module.css";
+import { StoreKeyTypeColor } from "@/redux/types";
 
 export default function GetColorButton({
   storeKey,
 }: {
-  storeKey: "dotsOptions" | "cornersSquareOptions" | "backgroundOptions";
+  storeKey: StoreKeyTypeColor;
 }) {
   const dispatch = useDispatch();
 

@@ -1,18 +1,19 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import QRCodeStyling from "qr-code-styling";
+import QRCodeStyling, { Options } from "qr-code-styling";
 
 import { useSelector } from "react-redux";
+import type { RootState } from "@/redux/store";
 
 export default function ClientQR() {
-  const reduxOptions = useSelector((state: any) => state.propertyQr); // to_do fix type later
+  const qrOptions = useSelector((state: RootState) => state.propertyQr);
 
   const [qrCode, setQrCode] = useState<QRCodeStyling>();
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setQrCode(new QRCodeStyling(reduxOptions));
+    setQrCode(new QRCodeStyling(qrOptions));
   }, []);
 
   useEffect(() => {
@@ -23,8 +24,8 @@ export default function ClientQR() {
 
   useEffect(() => {
     if (!qrCode) return;
-    qrCode?.update(reduxOptions);
-  }, [qrCode, reduxOptions]);
+    qrCode?.update(qrOptions);
+  }, [qrCode, qrOptions]);
 
   return (
     <div
