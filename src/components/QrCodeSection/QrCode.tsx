@@ -7,34 +7,25 @@ import { useSelector } from "react-redux";
 import type { RootState } from "@/redux/store";
 
 export default function ClientQR() {
-  const reduxOptions = useSelector((state: RootState) => state.propertyQr);
+  const QrOptions = useSelector((state: RootState) => state.propertyQr);
 
   const [qrCode, setQrCode] = useState<QRCodeStyling>();
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setQrCode(new QRCodeStyling(reduxOptions));
+    setQrCode(new QRCodeStyling(QrOptions));
   }, []);
 
-  // Что Коля об этом думае?
-  // useEffect(() => {
-  //   if (ref.current) {
-  //     qrCode?.append(ref.current);
-  //   }
-  // }, [qrCode, ref]);
-
-  // Небольшой совет по защите от двойного добавления
   useEffect(() => {
-    if (ref.current && qrCode) {
-      ref.current.innerHTML = ""; // очистить контейнер перед вставкой
-      qrCode.append(ref.current);
+    if (ref.current) {
+      qrCode?.append(ref.current);
     }
-  }, [qrCode]);
+  }, [qrCode, ref]);
 
   useEffect(() => {
     if (!qrCode) return;
-    qrCode?.update(reduxOptions);
-  }, [qrCode, reduxOptions]);
+    qrCode?.update(QrOptions);
+  }, [qrCode, QrOptions]);
 
   return (
     <div

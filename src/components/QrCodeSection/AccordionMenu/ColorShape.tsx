@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import { StoreKeyTypeColor } from "@/redux/types";
 
 import GetColorButton from "./GetColorButton";
 import DeleteButton from "./DeleteButton";
@@ -12,20 +13,16 @@ import style from "./style.module.css";
 export default function ColorShape({
   storeKey,
 }: {
-  storeKey:
-    | "dotsOptions"
-    | "cornersSquareOptions"
-    | "cornersDotOptions"
-    | "backgroundOptions";
+  storeKey: StoreKeyTypeColor;
 }) {
-  const reduxOptions = useSelector((state: RootState) => state.propertyQr);
+  const QrOptions = useSelector((state: RootState) => state.propertyQr);
 
   const [targetColor, setTargetColor] = useState<number | null>(0);
 
   return (
     <div className="overflow-hidden transition-all duration-300 ">
       <div className={style.container}>
-        {reduxOptions[storeKey].gradient.colorStops.map((el, index) => (
+        {QrOptions[storeKey].gradient.colorStops.map((el, index) => (
           <div
             key={index}
             onClick={() => {

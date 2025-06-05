@@ -1,16 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteColorStore } from "@/redux/propertyQrSlice";
+import { StoreKeyTypeColor } from "@/redux/types";
 
 export default function DeleteButton({
   storeKey,
   index,
 }: {
-  storeKey:
-    | "dotsOptions"
-    | "cornersSquareOptions"
-    | "cornersDotOptions"
-    | "backgroundOptions";
+  storeKey: StoreKeyTypeColor;
   index: number;
 }) {
   const dispatch = useDispatch();

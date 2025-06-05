@@ -56,3 +56,10 @@ export type QrCodeState = {
     gradient: Gradient;
   };
 };
+
+export type StoreKeyTypePoint =
+  | "dotsOptions"
+  | "cornersSquareOptions"
+  | "cornersDotOptions";
+
+export type StoreKeyTypeColor = StoreKeyTypePoint | "backgroundOptions";

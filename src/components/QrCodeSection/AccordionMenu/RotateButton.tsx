@@ -1,19 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { rotationGradient } from "@/redux/propertyQrSlice";
+import { StoreKeyTypeColor } from "@/redux/types";
 import style from "./style.module.css";
 import { RootState } from "@/redux/store";
 
 export default function RotateButton({
   storeKey,
 }: {
-  storeKey:
-    | "dotsOptions"
-    | "cornersSquareOptions"
-    | "cornersDotOptions"
-    | "backgroundOptions";
+  storeKey: StoreKeyTypeColor;
 }) {
-  const reduxOptions = useSelector((state: RootState) => state.propertyQr);
+  const QrOptions = useSelector((state: RootState) => state.propertyQr);
 
   const dispatch = useDispatch();
 
@@ -49,21 +46,21 @@ export default function RotateButton({
       <div className="grid w-12 h-12">
         <div
           className="
-      row-start-1 col-start-1 
-      flex items-center justify-end 
-      rounded-full border-blue-800 border-[3px] 
-      origin-center 
-      w-12 h-12
-    "
+          row-start-1 col-start-1 
+          flex items-center justify-end 
+          rounded-full border-blue-800 border-[3px] 
+          origin-center 
+          w-12 h-12
+          "
           style={{
-            transform: `rotate(${reduxOptions[storeKey].gradient.rotation}deg)`,
+            transform: `rotate(${QrOptions[storeKey].gradient.rotation}deg)`,
           }}
         >
           <div className="rounded-full border-blue-800 border-[3px] w-4 h-4"></div>
         </div>
 
         <div className="row-start-1 col-start-1 self-center justify-self-center">
-          {reduxOptions[storeKey].gradient.rotation}
+          {QrOptions[storeKey].gradient.rotation}
         </div>
       </div>
     </button>

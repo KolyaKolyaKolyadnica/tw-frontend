@@ -3,37 +3,45 @@ import { useDispatch, useSelector } from "react-redux";
 import { optionsType } from "@/redux/propertyQrSlice";
 import style from "./style.module.css";
 import { RootState } from "@/redux/store";
+import { StoreKeyTypePoint } from "@/redux/types";
+import { CornerDotType, CornerSquareType, DotType } from "qr-code-styling";
 
 export default function OptionsType({
   storeKey,
 }: {
-  storeKey: "dotsOptions" | "cornersSquareOptions" | "cornersDotOptions";
+  storeKey: StoreKeyTypePoint;
 }) {
-  const reduxOptions = useSelector((state: RootState) => state.propertyQr);
+  const QrOptions = useSelector((state: RootState) => state.propertyQr);
   const dispatch = useDispatch();
 
-  const qrStyle = [
+  const dotType = [
     "classy",
     "rounded",
     "dots",
     "classy-rounded",
     "square",
     "extra-rounded",
-  ] as const;
+  ];
 
-  type qrStylenType = (typeof qrStyle)[number];
+  const qrStyle = {
+    dotsOptions: [...dotType] as DotType[],
+
+    cornersSquareOptions: [...dotType, "dot"] as CornerSquareType[],
+
+    cornersDotOptions: [...dotType, "dot"] as CornerDotType[],
+  };
 
   return (
     <div>
       <div className={style.container}>
-        {qrStyle.map((el: qrStylenType, index) => (
+        {qrStyle[storeKey].map((el, index) => (
           <div
             key={index}
             onClick={() => {
               dispatch(optionsType({ storeKey, newType: el }));
             }}
             className={`${style.square} ${
-              el === reduxOptions.shape ? style.square_target : ""
+              el === QrOptions.shape ? style.square_target : ""
             }`}
           >
             {el}

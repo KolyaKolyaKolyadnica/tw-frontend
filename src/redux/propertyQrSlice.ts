@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { updateGradientOffset } from "@/utils/qrHelpers";
-import type { QrCodeState } from "./types";
+import type {
+  QrCodeState,
+  StoreKeyTypeColor,
+  StoreKeyTypePoint,
+} from "./types";
 import { CornerDotType, CornerSquareType, DotType } from "qr-code-styling";
 
 export const propertyQrSlice = createSlice({
@@ -65,7 +69,7 @@ export const propertyQrSlice = createSlice({
     optionsType: (
       state,
       action: PayloadAction<{
-        storeKey: "dotsOptions" | "cornersSquareOptions" | "cornersDotOptions";
+        storeKey: StoreKeyTypePoint;
         newType: DotType | CornerSquareType | CornerDotType;
       }>
     ) => {
@@ -81,11 +85,7 @@ export const propertyQrSlice = createSlice({
     updateColorStore: (
       state,
       action: PayloadAction<{
-        storeKey:
-          | "dotsOptions"
-          | "cornersSquareOptions"
-          | "cornersDotOptions"
-          | "backgroundOptions";
+        storeKey: StoreKeyTypeColor;
         targetColor: number | null;
         newColor: string;
       }>
@@ -101,11 +101,7 @@ export const propertyQrSlice = createSlice({
     deleteColorStore: (
       state,
       action: PayloadAction<{
-        storeKey:
-          | "dotsOptions"
-          | "cornersSquareOptions"
-          | "cornersDotOptions"
-          | "backgroundOptions";
+        storeKey: StoreKeyTypeColor;
         index: number;
       }>
     ) => {
@@ -120,11 +116,7 @@ export const propertyQrSlice = createSlice({
     getColorStore: (
       state,
       action: PayloadAction<{
-        storeKey:
-          | "dotsOptions"
-          | "cornersSquareOptions"
-          | "cornersDotOptions"
-          | "backgroundOptions";
+        storeKey: StoreKeyTypeColor;
       }>
     ) => {
       const { storeKey } = action.payload;
@@ -143,11 +135,7 @@ export const propertyQrSlice = createSlice({
     rotationGradient: (
       state,
       action: PayloadAction<{
-        storeKey:
-          | "dotsOptions"
-          | "cornersSquareOptions"
-          | "cornersDotOptions"
-          | "backgroundOptions";
+        storeKey: StoreKeyTypeColor;
         rotationAngle: number;
       }>
     ) => {

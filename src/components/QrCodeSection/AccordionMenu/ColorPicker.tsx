@@ -2,6 +2,8 @@ import React from "react";
 import { HexColorPicker } from "react-colorful";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import { StoreKeyTypeColor } from "@/redux/types";
+
 import { updateColorStore } from "@/redux/propertyQrSlice";
 
 import { Input } from "@/components/ui/input";
@@ -11,11 +13,7 @@ export default function ColorPicker({
   storeKey,
 }: {
   targetColor: number | null;
-  storeKey:
-    | "dotsOptions"
-    | "cornersSquareOptions"
-    | "cornersDotOptions"
-    | "backgroundOptions";
+  storeKey: StoreKeyTypeColor;
 }) {
   const count = useSelector((state: RootState) => state.propertyQr);
   const dispatch = useDispatch();
